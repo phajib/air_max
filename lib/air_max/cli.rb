@@ -37,7 +37,7 @@ class AirMax::CLI
     def menu
         input = nil
         while input != "exit"
-            print "Type \'list\' to view all Air Max shoes or type \'exit\' to quit: "
+            print "\nType \'list\' to view all Air Max shoes or type \'exit\' to quit: "
             input = gets.strip.downcase
 
             if  input == "list"
@@ -55,22 +55,27 @@ class AirMax::CLI
             shoe_list
             print "\nWould you like to read about a particular shoe? (Y/N): \n"
             input = gets.strip.upcase
-            case input
-            when "Y"
-                print "Please select a number: "
-                shoe_select = gets.strip
-                index = input.to_i - 1
-                if index.between?(0,26)
-                    binding.pry
-                    # puts "#{air.description}"
+            while input != "N" || input != "exit"
+                if input == "Y"
+                    print "Please select a number: "
+                    shoe_num = gets.strip
+                    index = shoe_num.to_i - 1
+                    
+                    if shoe_num.to_i.between?(0,27)#@am_shoes.length)
+                        shoe_details = @am_shoes[index]
+                        puts "\n\n"
+                        puts shoe_details.shoe_name + "\n\n" + shoe_details.description + "\n\n\n\n"
+                    else
+                        puts "Invalid input, select a number accordingly."
+                    end
+                # when "N"
+                #     menu
+                # when "exit"
+                #     finished
+                #     break
+                else
+                    print "Input is invalid, type \'Y\' or \'N\': \n"
                 end
-            when "N"
-                menu
-            when "exit"
-                finished
-                break
-            else
-                print "Input is invalid, type \'Y\' or \'N\': \n"
             end
         end
     end
