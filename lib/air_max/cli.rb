@@ -28,32 +28,9 @@ class AirMax::CLI
     end
 
     def shoe_list
-        AirMax::Air.all.each.with_index(1) do |shoe, index|
-            puts "#{index}. #{shoe.shoe_name}"
-        end
-    end
-
-    def am_list
-        input = nil
-        while input != "exit"
-            shoe_list
-            print "Would you like to read about a particular shoe? (Y/N): "
-            input = gets.strip.downcase
-            case input
-            when "y"
-                print "Please select a number: "
-                shoe_select = gets.strip
-                if shoe_select.to_i > 0 || shoe_select.to_i > index.last
-                    binding.pry
-                end
-            when "n"
-                menu
-            when "exit"
-                finished
-                break
-            else
-                print "Input is invalid, type \'Y\' or \'N\': "
-            end
+        @am_shoes = AirMax::Air.all
+        @am_shoes.each.with_index(1) do |shoe, i|
+            puts "#{i}. #{shoe.shoe_name}"
         end
     end
 
@@ -68,6 +45,32 @@ class AirMax::CLI
                 # Ask user to view a particular shoe
             else
                 puts "Input is invalid, type list or exit."
+            end
+        end
+    end
+
+    def am_list
+        input = nil
+        while input != "exit"
+            shoe_list
+            print "\nWould you like to read about a particular shoe? (Y/N): \n"
+            input = gets.strip.upcase
+            case input
+            when "Y"
+                print "Please select a number: "
+                shoe_select = gets.strip
+                index = input.to_i - 1
+                if index.between?(0,26)
+                    binding.pry
+                    # puts "#{air.description}"
+                end
+            when "N"
+                menu
+            when "exit"
+                finished
+                break
+            else
+                print "Input is invalid, type \'Y\' or \'N\': \n"
             end
         end
     end
