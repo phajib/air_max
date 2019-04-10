@@ -1,9 +1,9 @@
 class AirMax::Air
-    attr_accessor :name, :max96, :zero, :shoe_name, :description
+    attr_accessor :name, :name1, :name2, :max96, :zero, :shoe_name, :description
 
     @@all = []
 
-    def initialize(shoe_name, description)
+    def initialize(shoe_name, description, max96, zero)
         @shoe_name = shoe_name
         @description = description
         @max96 = max96

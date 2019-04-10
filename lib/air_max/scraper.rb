@@ -13,7 +13,7 @@ class AirMax::Scraper
                 description = am.css("p").text
             end
             am_air << {name: shoe_name, name1: max96, name2: zero, history: description}
-            AirMax::Air.new(shoe_name, description)
+            AirMax::Air.new(shoe_name, description, max96, zero)
         end
         am_air
     end
