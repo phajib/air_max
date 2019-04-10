@@ -58,26 +58,26 @@ class AirMax::CLI
         puts "To return to the menu type \'menu\'.".yellow
         print "To quit, type \'exit\': ".yellow
         input = gets.strip
-        index = input.to_i - 1
+        shoe_num = input.to_i - 1
         # binding.pry
         case input
-        # if input.to_i.between?(0,27)
-        when index.between?(1,27)
+        # if shoe_num.to_i.between?(0,27)
+        when shoe_num.between?(1,27)
             # if index.between?(0,27)
-            shoe_details = @am_shoes[index]
-            if input.to_i == 13
+            shoe_details = @am_shoes[shoe_num]
+            if shoe_num == 13
                 puts "\n\n#{shoe_details.shoe_name}.yellow"
                 puts "\n#{shoe_details.max96}\n\n.yellow"
-            elsif input.to_i == 24
+            elsif shoe_num == 24
                 puts "\n\n#{shoe_details.shoe_name}.yellow"
                 puts "\n#{shoe_details.zero}\n\n.yellow"
             else
                 puts "\n\n#{shoe_details.shoe_name}".yellow
                 puts "\n#{shoe_details.description}\n\n".yellow
             end
-        # elsif input == "menu"
+        # elsif shoe_num == "menu"
         #     menu
-        # elsif input == "exit"
+        # elsif shoe_num == "exit"
         #     finished
         when "menu"
             menu
