@@ -6,7 +6,7 @@ class AirMax::CLI
 
         brief_history   # shoe brief history of Air Max shoes, scraped from site
         menu            # display menu
-        finished        # exit
+        # finished        # exit
     end
 
     def brief_history
@@ -23,16 +23,19 @@ class AirMax::CLI
 
     def menu
         input = nil
-        print "\nTo view a list of Air Max shoes type \'list\' or type \'exit\' to quit: ".yellow
-        input = gets.strip.downcase
-        case input
-        when "exit"
-            finished
-        when "list"
-            am_list
-        else
-            puts "Invalid input".blink.red + ", type list or exit.".red
-            menu
+        while input != "exit"
+            print "\nTo view a list of Air Max shoes type \'list\' or type \'exit\' to quit: ".yellow
+            input = gets.strip.downcase
+            if input.to_i.between?(1,27)
+                am_list(input)
+            elsif input == "exit"
+                finished
+            elsif input == "list"
+                shoe_list
+            else
+                puts "Invalid input".blink.red + ", type list or exit.".red
+                menu
+            end
         end
     end
 
@@ -50,43 +53,46 @@ class AirMax::CLI
             end
         end
         puts "------------------------------------".yellow
+        puts "\nTo view the history of a particular shoe, select a number between 1 - 27. ".yellow
+        puts "To quit, type \'exit\': ".yellow
     end
 
-    def am_list
-        shoe_list
-        puts "\nTo view the history of a particular shoe, select a number between 1 - 27.".yellow
-        puts "To return to the menu type \'menu\'.".yellow
-        print "To quit, type \'exit\': ".yellow
-        input = gets.strip
-        shoe_num = input.to_i - 1
+    def am_list(input)
         # binding.pry
-        case input
-        # if shoe_num.to_i.between?(0,27)
-        when shoe_num.between?(1,27)
-            # if index.between?(0,27)
+        # shoe_list
+        # puts "\nTo view the history of a particular shoe, select a number between 1 - 27. ".yellow
+        # # puts "To return to the menu type \'menu\'.".yellow
+        # puts "To quit, type \'exit\': ".yellow
+        # input = gets.strip
+        shoe_num = input.to_i - 1
+        # # binding.pry
+        # case input
+        # # if shoe_num.to_i.between?(0,27)
+        # when shoe_num.between?(0,27)
+        #     # if index.between?(0,27)
             shoe_details = @am_shoes[shoe_num]
             if shoe_num == 13
-                puts "\n\n#{shoe_details.shoe_name}.yellow"
-                puts "\n#{shoe_details.max96}\n\n.yellow"
+                puts "\n\n#{shoe_details.shoe_name}".yellow
+                puts "\n#{shoe_details.max96}\n\n".yellow
             elsif shoe_num == 24
-                puts "\n\n#{shoe_details.shoe_name}.yellow"
-                puts "\n#{shoe_details.zero}\n\n.yellow"
+                puts "\n\n#{shoe_details.shoe_name}".yellow
+                puts "\n#{shoe_details.zero}\n\n".yellow
             else
                 puts "\n\n#{shoe_details.shoe_name}".yellow
                 puts "\n#{shoe_details.description}\n\n".yellow
             end
-        # elsif shoe_num == "menu"
+        # # elsif shoe_num == "menu"
+        # #     menu
+        # # elsif shoe_num == "exit"
+        # #     finished
+        # when "menu"
         #     menu
-        # elsif shoe_num == "exit"
+        # when "exit"
         #     finished
-        when "menu"
-            menu
-        when "exit"
-            finished
-        else
-            puts "\nInvalid input".blink.red + ", select a number between 1-27.\n".red
-            am_list
-        end
+        # else
+        #     puts "\nInvalid input".blink.red + ", select a number between 1-27.\n".red
+        #     am_list
+        # end
     end
 
     def finished
