@@ -6,7 +6,6 @@ class AirMax::Air
     def initialize(shoe_name, description)
         @shoe_name = shoe_name
         @description = description
-        # am_hash.each {|key, value| self.send("#{key}", value)}
         @@all << self
     end
 

@@ -2,6 +2,7 @@ require 'pry'
 require 'nokogiri'
 require 'open-uri'
 require 'colorize'
+require 'rubygems'
 
 require_relative './air_max/version'
 require_relative './air_max/cli.rb'
